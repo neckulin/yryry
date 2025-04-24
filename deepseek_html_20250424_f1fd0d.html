@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARTMASTER | Creative Competition</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #ff4d4d;
+            --secondary: #4d79ff;
+            --accent: #ffcc4d;
+            --dark: #1a1a2e;
+            --light: #f8f8f8;
+            --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        /* Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Playfair+Display:wght@700&display=swap');
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="none" stroke="%23ff4d4d" stroke-width="0.5" d="M0,0 L100,100 M100,0 L0,100" /></svg>');
+            opacity: 0.05;
+            background-size: 100% 100%;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
+            max-width: 1200px;
+        }
+        
+        .hero-title {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 77, 77, 0.2);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 77, 77, 0.6), 0 0 30px rgba(77, 121, 255, 0.4);
+            }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .cta-button:hover::after {
+            opacity: 1;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.3;
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            background: var(--secondary);
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 70px;
+            height: 70px;
+            background: var(--accent);
+            top: 80%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        .shape:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            background: var(--primary);
+            top: 30%;
+            left: 50%;
+            animation-delay: 6s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-50px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+        
+        /* About Section */
+        .about {
+            padding: 100px 20px;
+            background-color: var(--light);
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--light);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .image-frame {
+            width: 100%;
+            height: 400px;
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid var(--primary);
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--dark), #2a2a4a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--light);
+            font-size: 1.2rem;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            padding: 100px 20px;
+            background-color: var(--dark);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        
+        .gallery-item-title {
+            position: absolute;
+            bottom: -50px;
+            left: 20px;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 2;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-item-title {
+            bottom: 20px;
+        }
+        
+        /* Judges Section */
+        .judges {
+            padding: 100px 20px;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .judges-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .judge-card {
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .judge-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .judge-image {
+            height: 250px;
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .judge-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 77, 77, 0.3));
+            z-index: 1;
+        }
+        
+        .judge-info {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .judge-name {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .judge-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #0f0f23 100%);
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-link {
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+        
+        .footer-link:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">ARTMASTER</h1>
+            <p class="hero-subtitle">The premier international competition celebrating creative excellence across all artistic disciplines. Join us in discovering the next generation of master artists.</p>
+            <a href="#register" class="cta-button">Apply Now</a>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">About The Competition</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>ARTMASTER is a global platform that brings together exceptional talent from around the world to showcase their creative vision. Since our inception in 2010, we've been committed to discovering and nurturing artistic excellence.</p>
+                <p>This year's competition features expanded categories including Digital Art, Mixed Media, Sculpture, and Experimental Forms. Our distinguished panel of judges will evaluate works based on originality, technical skill, and emotional impact.</p>
+                <p>Winners will receive cash prizes, international exhibition opportunities, and artist residencies at prestigious institutions. The grand prize winner will be featured in ArtForum and receive a solo exhibition in New York.</p>
+            </div>
+            <div class="about-image">
+                <div class="image-frame">
+                    <div class="image-placeholder">ARTMASTER 2024 Exhibition Preview</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Featured Works</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://source.unsplash.com/random/600x600/?abstract-art" alt="Abstract Art">
+                <h3 class="gallery-item-title">Ethereal Forms</h3>
+            </div>
+            <div class="gallery-item">
+                <img src="https://source.unsplash.com/random/600x600/?sculpture" alt="Sculpture">
+                <h3 class="gallery-item-title">Modern Totem</h3>
+            </div>
+            <div class="gallery-item">
+                <img src="https://source.unsplash.com/random/600x600/?digital-art" alt="Digital Art">
+                <h3 class="gallery-item-title">Digital Dreams</h3>
+            </div>
+            <div class="gallery-item">
+                <img src="https://source.unsplash.com/random/600x600/?painting" alt="Painting">
+                <h3 class="gallery-item-title">Color Symphony</h3>
+            </div>
+            <div class="gallery-item">
+                <img src="https://source.unsplash.com/random/600x600/?installation-art" alt="Installation">
+                <h3 class="gallery-item-title">Space Reimagined</h3>
+            </div>
+            <div class="gallery-item">
+                <img src="https://source.unsplash.com/random/600x600/?photography" alt="Photography">
+                <h3 class="gallery-item-title">Urban Fragments</h3>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Judges Section -->
+    <section class="judges" id="judges">
+        <h2 class="section-title">Our Esteemed Judges</h2>
+        <div class="judges-grid">
+            <div class="judge-card">
+                <div class="judge-image"></div>
+                <div class="judge-info">
+                    <h3 class="judge-name">Dr. Elena Vasquez</h3>
+                    <p class="judge-title">Director, Museum of Contemporary Art</p>
+                </div>
+            </div>
+            <div class="judge-card">
+                <div class="judge-image"></div>
+                <div class="judge-info">
+                    <h3 class="judge-name">James Chen</h3>
+                    <p class="judge-title">Editor-in-Chief, ArtForum International</p>
+                </div>
+            </div>
+            <div class="judge-card">
+                <div class="judge-image"></div>
+                <div class="judge-info">
+                    <h3 class="judge-name">Fatima Al-Mansoori</h3>
+                    <p class="judge-title">Curator, Guggenheim Abu Dhabi</p>
+                </div>
+            </div>
+            <div class="judge-card">
+                <div class="judge-image"></div>
+                <div class="judge-info">
+                    <h3 class="judge-name">Prof. David Müller</h3>
+                    <p class="judge-title">Chair, Royal College of Art</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">ARTMASTER</div>
+        <div class="footer-links">
+            <a href="#about" class="footer-link">About</a>
+            <a href="#gallery" class="footer-link">Gallery</a>
+            <a href="#judges" class="footer-link">Judges</a>
+            <a href="#register" class="footer-link">Apply</a>
+            <a href="#" class="footer-link">FAQ</a>
+            <a href="#" class="footer-link">Contact</a>
+        </div>
+        <div class="social-links">
+            <a href="#" class="social-link">FB</a>
+            <a href="#" class="social-link">IG</a>
+            <a href="#" class="social-link">TW</a>
+            <a href="#" class="social-link">YT</a>
+        </div>
+        <p class="copyright">© 2024 ARTMASTER International. All rights reserved.</p>
+    </footer>
+</body>
+</html>
